@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import grapesjs from "grapesjs";
 import React from 'react';
 import lodash from 'lodash';
@@ -51,11 +52,19 @@ export default (editor: grapesjs.Editor) => {
 
             mountReact(cmp, el) {
                 if (lodash.has(this.modelOpt, 'action')) {
+                    // const Root = createRoot(el)
+                    // Root.render(cmp)
+                    // this.Root = Root;
                     // console.log("LENG ~ mountReact ~ cmp, el", lodash.cloneDeep(this.modelOpt), this, cmp, el)
+                    // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis
                     ReactDOM.render(cmp, el);
                 }
             },
-
+            removed() {
+                if (this.Root && this.Root.unmount) {
+                    this.Root.unmount()
+                }
+            },
             render() {
                 const { model, el } = this;
                 this.updateAttributes();

@@ -30,6 +30,7 @@ const App: React.FC = () => {
         Open Modal with async logic
       </Button>
       <Modal
+        forceRender
         title="Title"
         open={open}
         onOk={handleOk}

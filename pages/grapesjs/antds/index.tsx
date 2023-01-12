@@ -6,7 +6,7 @@ import drawer from "./drawer";
 import test from "./test";
 import grapesjs from "grapesjs";
 export default (editor:grapesjs.Editor) => {
-  const { Blocks, Components } = editor;
+  const { Blocks,BlockManager, Components } = editor;
   const sheetsManager = new Map();
   // Helper for MUI components
   const addCmp = ({ type, component, props }) => {
@@ -16,6 +16,15 @@ export default (editor:grapesjs.Editor) => {
         defaults: {
           ...props,
           component,
+          stylable: true,
+          resizable: true,
+          editable: true,
+          draggable: true,
+          droppable: true,
+          attributes: {
+            mlsid: 'Default MLSID',
+            editable: true
+          },
         },
       },
       view: {

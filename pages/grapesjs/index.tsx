@@ -20,14 +20,15 @@ export default class App extends React.Component<IAppProps> {
       container: "#gjs",
       // Get the content for the canvas directly from the element
       // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
-      fromElement: true,
+      // fromElement: true,
+      
       // Size of the editor
       height: "100%",
       width: "100%",
-      showOffsets:true,
+      // showOffsets:true,
       // Disable the storage manager for the moment
       storageManager: false,
-      selectorManager: { componentFirst: true },
+      // selectorManager: { componentFirst: true },
       i18n: {
         locale: "zh", // default locale
         detectLocale: true, // by default, the editor will detect the language

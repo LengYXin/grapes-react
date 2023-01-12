@@ -1,6 +1,7 @@
 import Listing from './listing';
+import grapesjs from "grapesjs";
 
-export default (editor) => {
+export default (editor: grapesjs.Editor) => {
   editor.Components.addType('Listing', {
     extend: 'react-component',
     model: {
