@@ -1,88 +1,101 @@
-import {Button,Card} from 'antd'
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import { Button, Modal } from "antd";
+import Head from "next/head";
+import React from "react";
+// import requirejs from "requirejs";
+import Image from "next/image";
+// import "systemjs";
+// import { Inter } from '@next/font/google'
+import dynamic from "next/dynamic";
+import Btn from "../components/btn";
+import easytoanalyze from "../public/scripts/easytoanalyze";
 
-const inter = Inter({ subsets: ['latin'] })
+// if (process.browser) {
+//   // @ts-ignore
+//   window.react = React;
+//   // console.log("LENG ~ window.React", window.React)
+//   System.addImportMap({
+//     imports: {
+//       react: "app:react",
+//     },
+//   });
+//   System.set("app:react", { default: React, __useDefault: true });
+// }
+// @ts-ignore
+// import  easytoanalyze from 'http://localhost:3000/scripts/easytoanalyze.js'
+// const inter = Inter({ subsets: ['latin'] })
+async function test() {
+  // @ts-ignore
+  // const Antd = await import("http://localhost:3000/scripts/easytoanalyze.js"); //new URL('/antd.js', import.meta.url)
+  // console.log("LENG ~ Home ~ Antd", Antd);
+  // const test = await System.import("http://localhost:3000/scripts/test.umd.js");
+  const test = await import("http://localhost:3000/scripts/test.tsx?v=2");
+  console.log("LENG ~ test ~ test", test);
+  // requirejs(["helper/util"], function(util) {
+  //   //此函数在加载scripts/helper/util.js时调用。
+  //   //如果util.js调用define()，则直到
+  //   //util的依赖项已加载，util参数将保持
+  //   //“helper/util"的模块值。
+  // });
+}
 
 export default function Home() {
+  // test();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
-    <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-      <h1 className="text-6xl font-bold">
-        Welcome to{' '}
-        <a className="text-blue-600" href="https://nextjs.org">
-          Next.js!
-        </a>
-      </h1>
-
-      <p className="mt-3 text-2xl">
-        Get started by editing{' '}
-        <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-          pages/index.tsx
-        </code>
-      </p>
-
-      <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Test />
+      {/* <Webview /> */}
+      <footer className="flex h-24 w-full items-center justify-center border-t">
         <a
-          href="https://nextjs.org/docs"
-          className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+          className="flex items-center justify-center gap-2"
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Find in-depth information about Next.js features and its API.
-          </p>
+          Powered by{" "}
+          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </a>
-
-        <a
-          href="https://nextjs.org/learn"
-          className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+      </footer>
+    </div>
+  );
+}
+class Test extends React.Component<any> {
+  state = {
+    open: false,
+  };
+  public render() {
+    return (
+      <div>
+        <Button
+          onClick={() => {
+            this.setState({ open: !this.state.open });
+          }}
         >
-          <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Learn about Next.js in an interactive course with quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://github.com/vercel/next.js/tree/canary/examples"
-          className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+          我是按钮
+        </Button>
+        <Modal
+          open={this.state.open}
+          onCancel={() => this.setState({ open: false })}
         >
-          <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Discover and deploy boilerplate example Next.js projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-        >
-          <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Instantly deploy your Next.js site to a public URL with Vercel.
-          </p>
-        </a>
+          <Test2 />
+        </Modal>
       </div>
-    </main>
-
-    <footer className="flex h-24 w-full items-center justify-center border-t">
-      <a
-        className="flex items-center justify-center gap-2"
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by{' '}
-        <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-      </a>
-    </footer>
-  </div>
-  )
+    );
+  }
+}
+class Test2 extends React.Component<any> {
+  state = {
+    open: false,
+  };
+  // url = "http://localhost:3000/scripts/test.js?v=3";
+  Webview = dynamic(() => import('http://localhost:3000/scripts/test.js?v=3'), {
+    ssr: false,
+  });
+  public render() {
+    console.log("LENG ~ Test2 ~ render ~ render")
+    return <this.Webview />;
+  }
 }
